@@ -1,0 +1,54 @@
+@font-face{
+  font-family: 'indieflower';
+  src: url('fonts/Indie_Flower/IndieFlower.ttf');
+}
+
+@font-face {
+  font-family: 'blacksword';
+  src: url('fonts/Blacksword/Blacksword.otf');
+}
+body{
+  width: 100%;
+  height: 100%
+}
+#logIn{
+
+  position: fixed;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   overflow: auto;
+  height:100%;
+  width: 100%;
+  text-align: center;
+  background-color: gold;
+}
+
+#logInLogo{
+  position: relative;
+    top: 45%;
+    font-size: 2rem;
+}
+
+ #logInLogo h1{
+  display: inline-block;
+}
+
+ #logInLogo h2{
+  display: inline-block;
+  font-family: 'blacksword';
+}
+
+#LogInLogo > form > input{
+  height: 32px !important;
+  font-size: 28px;
+}
+
+#LogInLogo form button{
+  height: 32px;
+}
+
+.hidden{
+  display: none;
+}
