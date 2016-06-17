@@ -35,16 +35,17 @@ public class Main {
     }
 
     public static void insertJob(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ? ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
-        stmt.setString(3, job.contactName);
-        stmt.setString(4, job.contactNumber);
-        stmt.setString(5, job.contactEmail);
-        stmt.setBoolean(6, job.haveApplied);
-        stmt.setInt(7, job.rating);
-        stmt.setString(8, job.comments);
-        stmt.setInt(9, job.userId);
+        stmt.setString(3, job.salary);
+        stmt.setString(4, job.contactName);
+        stmt.setString(5, job.contactNumber);
+        stmt.setString(6, job.contactEmail);
+        stmt.setBoolean(7, job.haveApplied);
+        stmt.setInt(8, job.rating);
+        stmt.setString(9, job.comments);
+        stmt.setInt(10, job.userId);
         stmt.execute();
     }
 
@@ -57,29 +58,31 @@ public class Main {
             Integer jobId = results.getInt("jobs.job_id");
             String companyName = results.getString("jobs.company_name");
             String location = results.getString("jobs.location");
+            String salary = results.getString("jobs.salary");
             String contactName = results.getString("jobs.contact_name");
             String contactNumber = results.getString("jobs.contact_number");
             String contactEmail = results.getString("jobs.contact_email");
             Boolean haveApplied = results.getBoolean("jobs.have_applied");
             Integer rating = results.getInt("jobs.rating");
             String comments = results.getString("jobs.comments");
-            Job job = new Job(jobId, companyName, location, contactName, contactNumber, contactEmail, haveApplied, rating, comments, userId);
+            Job job = new Job(jobId, companyName, location, salary, contactName, contactNumber, contactEmail, haveApplied, rating, comments, userId);
             jobs.add(job);
         }
         return jobs;
     }
 
     public static void updateJobs(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET company_name = ?, location = ?, contact_name = ?, contact_number = ?, contact_email = ?, have_applied = ?, rating = ?, comments = ? WHERE job_id = ?");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET company_name = ?, location = ?, salary = ?, contact_name = ?, contact_number = ?, contact_email = ?, have_applied = ?, rating = ?, comments = ? WHERE job_id = ?");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
-        stmt.setString(3, job.contactName);
-        stmt.setString(4, job.contactNumber);
-        stmt.setString(5, job.contactEmail);
-        stmt.setBoolean(6, job.haveApplied);
-        stmt.setInt(7, job.rating);
-        stmt.setString(8, job.comments);
-        stmt.setInt(9, job.jobId);
+        stmt.setString(3, job.salary);
+        stmt.setString(4, job.contactName);
+        stmt.setString(5, job.contactNumber);
+        stmt.setString(6, job.contactEmail);
+        stmt.setBoolean(7, job.haveApplied);
+        stmt.setInt(8, job.rating);
+        stmt.setString(9, job.comments);
+        stmt.setInt(10, job.jobId);
         stmt.execute();
     }
 
