@@ -22,6 +22,7 @@ var apply = {
             $('#logIn').fadeOut(2000, function() {
                 $('header').removeClass('hidden');
             })
+            console.log(JSON.stringify(user))
             $.ajax({
                 method: "POST",
                 url: "/login",
