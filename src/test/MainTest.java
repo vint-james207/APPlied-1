@@ -58,4 +58,17 @@ public class MainTest {
         assertTrue(job.userId == updatedJob.userId);
         assertTrue(jobs.get(0).companyName.equals("com"));
     }
+
+    @Test
+    public void testDelete() throws SQLException {
+        Connection conn = startConnection();
+        User user = new User(1, "Bob", "pw");
+        Main.insertUser(conn, user);
+        Job job = new Job(1, "company", "place", "contact", "555", "email", true, 3, "comments", user.userId);
+        Main.deleteJobs(conn, 1);
+        ArrayList<Job> jobs = Main.selectJobs(conn, user.userId);
+        conn.close();
+        assertTrue(jobs.size() == 0);
+
+    }
 }
