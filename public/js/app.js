@@ -13,6 +13,7 @@ var apply = {
     },
     events: function() {
         $('#submit').on('click', function() {
+          event.preventDefault();
             var user = {
                 username: $('#userName').val(),
                 password: $('#password').val()
@@ -24,7 +25,8 @@ var apply = {
             $.ajax({
                 method: "POST",
                 url: "/login",
-                data: user,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(user),
                 success: function(data){
                   console.log("this is my login",data);
                 },
@@ -41,6 +43,7 @@ var apply = {
         $.ajax({
             url: "/jobs",
             method: "POST",
+            contentType: "application/json; charset=utf-8",
             data: applyData,
             success: function(data) {
                 console.log(data);
