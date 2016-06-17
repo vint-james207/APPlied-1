@@ -141,5 +141,42 @@ public class Main {
                     return "";
                 }
         );
+
+        Spark.post(
+                "/create-job",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.attribute("username");
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Job job = parser.parse(body, Job.class);
+                    insertJob(conn, job);
+                    return "";
+                }
+        );
+
+        Spark.put(
+                "/update-job",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.attribute("username");
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Job job = parser.parse(body, Job.class);
+                    updateJobs(conn, job);
+                    return "";
+                }
+        );
+
+        Spark.delete(
+                "/delete-job/:jobId",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.attribute("username");
+                    int id = Integer.valueOf(request.params(":jobId"));
+                    deleteJobs(conn, id);
+                    return "";
+                }
+        );
     }
 }
