@@ -50,8 +50,11 @@ body{
 #submit{
   height: 25px;
   width: 10%;
+  font: 15px;
 }
 
 .hidden{
-  display: none;
+  visibility: none;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
 }
