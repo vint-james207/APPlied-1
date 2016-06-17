@@ -12,8 +12,8 @@
     <div id="logIn">
       <div id = 'logInLogo' ><h1 id="logTitle">APP</h1><h2>ly</h4>
       <form action="">
-        <input required class = "input" type="text" name="" id="" placeholder = "User Name:">
-        <input required class = "input" type="password" name="" id="" placeholder="Password:">
+        <input required class = "input" type="text" name="" id="userName" placeholder = "User Name:">
+        <input required class = "input" type="password" name="" id="password" placeholder="Password:">
         <button id = "submit" type="button" name="submit"><b>Log In</b></button>
       </form>
       </div>
@@ -23,27 +23,35 @@
         <fieldset>
           <label for="company">Company:</label>
           <input type="text" name="company" value="">
+          <fieldset>
+          <label class ='blocked' for="haveApplied">Applied:</label>
+          <input class = "radio" type="radio" name="haveApplied" value = "true" checked>Yes</br>
+          <input class = "radio" type="radio" name="haveApplied" value = "false">No
+          </fieldset>
         </fieldset>
         <fieldset>
           <label for="salary">Salary:</label>
-          <input type="text" name="salary" value="">
+          <input class = 'blocked' type="text" name="salary" value="">
         </fieldset>
         <fieldset>
           <label for="location">Location:</label>
-          <input type="text" name="location" value="">
+          <input class ='blocked'  type="text" name="location" value="">
         </fieldset>
         <fieldset>
           <label for="contactName">Contact Name:</label>
-          <input type="text" name="contactName" value="">
+          <input class ='blocked' type="text" name="contactName" value="">
           <label for="phone">Phone:</label>
-          <input type="text" name="phone" value="">
+          <input class ='blocked' type="text" name="phone" value="">
           <label for="email">Email:</label>
-          <input type="text" name="email" value="">
+          <input class ='blocked' type="text" name="email" value="">
         </fieldset>
         <fieldset>
           <label for="comments">Comments:</label>
-          <textarea name="comments" rows="5" cols="30"></textarea>
+          <textarea class = 'blocked' name="comments" rows="5" cols="30"></textarea>
+              <button type="submit" name="button" value="submit"> APPly </button>
         </fieldset>
+
+
       </form>
     </aside>
 
