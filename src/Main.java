@@ -11,7 +11,7 @@ public class Main {
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (user_id IDENTITY, username VARCHAR, password VARCHAR)");
-        stmt.execute("CREATE TABLE IF NOT EXISTS jobs (job_id IDENTITY, company_name VARCHAR, location VARCHAR, contact_name VARCHAR, contact_number VARCHAR, " +
+        stmt.execute("CREATE TABLE IF NOT EXISTS jobs (job_id IDENTITY, company_name VARCHAR, salary VARCHAR, location VARCHAR, contact_name VARCHAR, contact_number VARCHAR, " +
                 "contact_email VARCHAR, have_applied BOOLEAN, rating INT, comments VARCHAR, user_id INT)");
     }
 
@@ -35,7 +35,7 @@ public class Main {
     }
 
     public static void insertJob(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ? ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
         stmt.setString(3, job.salary);
