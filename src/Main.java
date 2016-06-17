@@ -70,7 +70,7 @@ public class Main {
     }
 
     public static void updateJobs(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET companyName = ?, location = ?, contactName = ?, contactNumber = ?, contactEmail = ?, haveApplied = ?, rating = ?, comments = ? WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET company_name = ?, location = ?, contact_name = ?, contact_number = ?, contact_email = ?, have_applied = ?, rating = ?, comments = ? WHERE job_id = ?");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
         stmt.setString(3, job.contactName);
@@ -84,7 +84,7 @@ public class Main {
     }
 
     public static void deleteJobs(Connection conn, Integer jobId) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM jobs WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM jobs WHERE job_id = ?");
         stmt.setInt(1, jobId);
         stmt.execute();
     }
@@ -143,7 +143,7 @@ public class Main {
         );
 
         Spark.post(
-                "/create-job",
+                "/",
                 (request, response) -> {
                     Session session = request.session();
                     session.attribute("username");
@@ -156,7 +156,7 @@ public class Main {
         );
 
         Spark.put(
-                "/update-job",
+                "/",
                 (request, response) -> {
                     Session session = request.session();
                     session.attribute("username");
@@ -169,11 +169,11 @@ public class Main {
         );
 
         Spark.delete(
-                "/delete-job/:jobId",
+                "/:job_id",
                 (request, response) -> {
                     Session session = request.session();
                     session.attribute("username");
-                    int id = Integer.valueOf(request.params(":jobId"));
+                    int id = Integer.valueOf(request.params(":job_id"));
                     deleteJobs(conn, id);
                     return "";
                 }
