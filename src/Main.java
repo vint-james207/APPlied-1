@@ -102,7 +102,7 @@ public class Main {
         Spark.init();
 
         Spark.get(
-                "/",
+                "/jobs",
                 (request, response) -> {
                     Session session = request.session();
                     String username = session.attribute("username");
@@ -131,8 +131,7 @@ public class Main {
                     }
                     Session session = request.session();
                     session.attribute("username", validUser);
-                    response.redirect("/");
-                    return "";
+                    return "Success.";
                 }
         );
         Spark.post(
@@ -140,13 +139,12 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     session.invalidate();
-                    response.redirect("/");
                     return "";
                 }
         );
 
         Spark.post(
-                "/",
+                "/jobs",
                 (request, response) -> {
                     Session session = request.session();
                     session.attribute("username");
@@ -159,7 +157,7 @@ public class Main {
         );
 
         Spark.put(
-                "/",
+                "/jobs",
                 (request, response) -> {
                     Session session = request.session();
                     session.attribute("username");
@@ -172,7 +170,7 @@ public class Main {
         );
 
         Spark.delete(
-                "/:job_id",
+                "/jobs/:job_id",
                 (request, response) -> {
                     Session session = request.session();
                     session.attribute("username");
