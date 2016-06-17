@@ -147,7 +147,10 @@ public class Main {
                 "/jobs",
                 (request, response) -> {
                     Session session = request.session();
-                    session.attribute("username");
+                    String username = session.attribute("username");
+                    if (username == null) {
+                        throw new Exception("Not logged in.");
+                    }
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
@@ -160,7 +163,10 @@ public class Main {
                 "/jobs",
                 (request, response) -> {
                     Session session = request.session();
-                    session.attribute("username");
+                    String username = session.attribute("username");
+                    if (username == null) {
+                        throw new Exception("Not logged in.");
+                    }
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
@@ -173,7 +179,10 @@ public class Main {
                 "/jobs/:job_id",
                 (request, response) -> {
                     Session session = request.session();
-                    session.attribute("username");
+                    String username = session.attribute("username");
+                    if (username == null) {
+                        throw new Exception("Not logged in.");
+                    }
                     int id = Integer.valueOf(request.params(":job_id"));
                     deleteJobs(conn, id);
                     return "";
