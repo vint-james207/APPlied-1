@@ -52,7 +52,15 @@ body{
   width: 10%;
   font: 15px;
 }
-
+aside{
+  display: inline-block;
+}
+#appliedAdd form input{
+  display: block;
+}
+#appliedAdd form textarea{
+  display: block;
+}
 .hidden{
   position: absolute !important;
   top: -9999px !important;
