@@ -1,78 +1,90 @@
 $(document).ready(function() {
-  $('#submit').on('click', function() {
-      $('#logIn').fadeOut(2000, function() {
 
-          $('header').removeClass('hidden');
-      })
-  })
-
+  apply.init();
 });
-//
-// // var apply = {
-// //     init: function(){
-//          apply.events();
-//          apply.styling();
-//        },
-//        styling: function(){
-//
-//        },
-// //     events: function() {
-// //       $('#submit').on('click', function() {
-// //           $('#logIn').fadeOut(2000, function() {
-// //
-// //               $('header').removeClass('hidden');
-// //           })
-// //       })
-// //     },
-//
-//       create: function(applyData){
-//         $.ajax({
-//           url: "/update-job",
-//           method: "POST",
-//           data: applyData,
-//           success: function(data){
-//             console.log(data);
-//           },
-//           error: function(err){
-//             console.error(err);
-//           }
-//         })
-//       },
-//       read: function(){
-//         $.ajax({
-//           url: "/update-job",
-//           method: "GET",
-//           success: function(data){
-//             console.log(data);
-//             data = JSON.parse(data);
-//           },
-//           error: function(err){
-//             console.error(err);
-//           }
-//         })
-//       },
-//       update: function(){
-//         $.ajax({
-//           url: "/update-job",
-//           method: "PUT"
-//           success function(data){
-//
-//           },
-//           error function(err){
-//
-//           }
-//         })
-//       },
-//       destroy: function(){
-//         $.ajax({
-//           url: "/update-job",
-//           method: "DELETE"
-//           success function(data){
-//
-//           },
-//           error: function(err){
-//             console.error(err);
-//           }
-//         })
-//       }
-// // }
+
+var apply = {
+    init: function() {
+        apply.events();
+        apply.styling();
+    },
+    styling: function() {
+
+    },
+    events: function() {
+        $('#submit').on('click', function() {
+            var user = {
+                username: $('#userName').val(),
+                password: $('#password').val()
+            }
+
+            $('#logIn').fadeOut(2000, function() {
+                $('header').removeClass('hidden');
+            })
+            $.ajax({
+                method: "POST",
+                url: "/login",
+                data: user,
+                success: function(data){
+                  console.log("this is my login",data);
+                },
+                error:function(err){
+                  console.error("something went wrong",err);
+                }
+
+            })
+        })
+    },
+
+
+    create: function(applyData) {
+        $.ajax({
+            url: "/jobs",
+            method: "POST",
+            data: applyData,
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(err) {
+                console.error(err);
+            }
+        })
+    },
+    read: function() {
+        $.ajax({
+            url: "/jobs",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+            },
+            error: function(err) {
+                console.error(err);
+            }
+        })
+    },
+    update: function() {
+        $.ajax({
+            url: "/jobs",
+            method: "PUT",
+            success:function(data) {
+
+            },
+            error:function(err) {
+
+            }
+        })
+    },
+    destroy: function() {
+        $.ajax({
+            url: "/jobs",
+            method: "DELETE",
+            success:function(data) {
+
+            },
+            error: function(err) {
+                console.error(err);
+            }
+        })
+    }
+}
