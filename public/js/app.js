@@ -1,6 +1,9 @@
 $(document).ready(function(){
   $('#submit').on('click',function(){
-    $('#logIn').addClass('hidden');
+    $('#logIn').fadeOut(2000 ,function(){
+
     $('header').removeClass('hidden');
   })
 })
+
+ });

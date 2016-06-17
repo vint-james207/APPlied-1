@@ -54,7 +54,7 @@ body{
 }
 
 .hidden{
-  visibility: none;
-  opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
