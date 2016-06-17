@@ -52,7 +52,26 @@ body{
   width: 10%;
   font: 15px;
 }
+aside{
+  display: inline-block;
+}
 
+#appliedAdd{
+  margin-left: 70px;
+}
+#appliedAdd form input{
+  display: block;
+}
+#appliedAdd form textarea{
+  display: block;
+}
+
+#appliedTo{
+  outline: 1px solid black;
+  height: 100px;
+  width: 35%;
+  margin-left: 200px;
+}
 .hidden{
   position: absolute !important;
   top: -9999px !important;
