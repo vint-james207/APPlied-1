@@ -7,11 +7,7 @@ import spark.Spark;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by jamesyburr on 6/16/16.
- */
 public class Main {
-
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (user_id IDENTITY, username VARCHAR, password VARCHAR)");
@@ -73,6 +69,26 @@ public class Main {
         return jobs;
     }
 
+    public static void updateJobs(Connection conn, Job job) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET companyName = ?, location = ?, contactName = ?, contactNumber = ?, contactEmail = ?, haveApplied = ?, rating = ?, comments = ? WHERE id = ?");
+        stmt.setString(1, job.companyName);
+        stmt.setString(2, job.location);
+        stmt.setString(3, job.contactName);
+        stmt.setString(4, job.contactNumber);
+        stmt.setString(5, job.contactEmail);
+        stmt.setBoolean(6, job.haveApplied);
+        stmt.setInt(7, job.rating);
+        stmt.setString(8, job.comments);
+        stmt.setInt(9, job.jobId);
+        stmt.execute();
+    }
+
+    public static void deleteJobs(Connection conn, Integer jobId) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM jobs WHERE id = ?");
+        stmt.setInt(1, jobId);
+        stmt.execute();
+    }
+
     public static void main(String[] args) throws SQLException {
 
         Server.createWebServer().start();
@@ -83,7 +99,7 @@ public class Main {
         Spark.init();
 
         Spark.get(
-            "/",
+                "/",
                 (request, response) -> {
                     Session session = request.session();
                     String username = session.attribute("username");
@@ -122,6 +138,43 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
+                    return "";
+                }
+        );
+
+        Spark.post(
+                "/create-job",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.attribute("username");
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Job job = parser.parse(body, Job.class);
+                    insertJob(conn, job);
+                    return "";
+                }
+        );
+
+        Spark.put(
+                "/update-job",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.attribute("username");
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Job job = parser.parse(body, Job.class);
+                    updateJobs(conn, job);
+                    return "";
+                }
+        );
+
+        Spark.delete(
+                "/delete-job/:jobId",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.attribute("username");
+                    int id = Integer.valueOf(request.params(":jobId"));
+                    deleteJobs(conn, id);
                     return "";
                 }
         );
