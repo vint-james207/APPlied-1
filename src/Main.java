@@ -60,7 +60,7 @@ public class Main {
         while (results.next()) {
             Integer jobId = results.getInt("jobs.job_id");
             String companyName = results.getString("jobs.company_name");
-            String location = results.getString("jobs. location");
+            String location = results.getString("jobs.location");
             String contactName = results.getString("jobs.contact_name");
             String contactNumber = results.getString("jobs.contact_number");
             String contactEmail = results.getString("jobs.contact_email");

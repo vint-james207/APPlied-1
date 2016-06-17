@@ -38,6 +38,8 @@ public class MainTest {
         Main.insertJob(conn, job2);
         Job job3 = new Job(3, "mcdonalds", "nyc", "contact", "555", "email", true, 1, "comments", user.userId);
         Main.insertJob(conn, job3);
-
+        ArrayList<Job> jobs = Main.selectJobs(conn, 1);
+        conn.close();
+        assertTrue(jobs.size() == 3);
     }
 }
