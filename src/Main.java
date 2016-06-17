@@ -69,7 +69,7 @@ public class Main {
         return jobs;
     }
 
-    public static void updateJobs(Connection conn, Integer jobId, User user, Jobs job) throws SQLException {
+    public static void updateJobs(Connection conn, Job job) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET companyName = ?, location = ?, contactName = ?, contactNumber = ?, contactEmail = ?, haveApplied = ?, rating = ?, comments = ? WHERE id = ?");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
@@ -79,6 +79,7 @@ public class Main {
         stmt.setBoolean(6, job.haveApplied);
         stmt.setInt(7, job.rating);
         stmt.setString(8, job.comments);
+        stmt.setInt(9, job.jobId);
         stmt.execute();
     }
 
