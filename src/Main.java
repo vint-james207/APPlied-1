@@ -42,7 +42,7 @@ public class Main {
         stmt.setString(4, job.contactName);
         stmt.setString(5, job.contactNumber);
         stmt.setString(6, job.contactEmail);
-        stmt.setBoolean(7, job.haveApplied);
+        stmt.setBoolean(7, job.applied);
         stmt.setString(8, job.comments);
         stmt.setInt(9, job.userId);
         stmt.execute();
@@ -61,7 +61,7 @@ public class Main {
             String contactName = results.getString("jobs.contact_name");
             String contactNumber = results.getString("jobs.contact_number");
             String contactEmail = results.getString("jobs.contact_email");
-            Boolean haveApplied = results.getBoolean("jobs.have_applied");
+            boolean haveApplied = results.getBoolean("jobs.have_applied");
             String comments = results.getString("jobs.comments");
             Job job = new Job(jobId, companyName, location, salary, contactName, contactNumber, contactEmail, haveApplied, comments, userId);
             jobs.add(job);
@@ -77,7 +77,7 @@ public class Main {
         stmt.setString(4, job.contactName);
         stmt.setString(5, job.contactNumber);
         stmt.setString(6, job.contactEmail);
-        stmt.setBoolean(7, job.haveApplied);
+        stmt.setBoolean(7, job.applied);
         stmt.setString(8, job.comments);
         stmt.setInt(9, job.jobId);
         stmt.execute();
@@ -151,9 +151,11 @@ public class Main {
                     if (username == null) {
                         throw new Exception("Not logged in.");
                     }
+                    User user = selectUser(conn, username);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
+                    job.setUserId(user.userId);
                     insertJob(conn, job);
                     return "Success.";
                 }

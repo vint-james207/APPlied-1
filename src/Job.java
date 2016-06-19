@@ -10,14 +10,14 @@ public class Job {
     String contactName;
     String contactNumber;
     String contactEmail;
-    boolean haveApplied;
+    Boolean applied;
     String comments;
     Integer userId;
 
     public Job() {
     }
 
-    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, Boolean haveApplied, String comments, Integer userId) {
+    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, boolean applied, String comments, Integer userId) {
         this.jobId = jobId;
         this.companyName = companyName;
         this.location = location;
@@ -25,7 +25,7 @@ public class Job {
         this.contactName = contactName;
         this.contactNumber = contactNumber;
         this.contactEmail = contactEmail;
-        this.haveApplied = haveApplied;
+        this.applied = applied;
         this.comments = comments;
         this.userId = userId;
     }
@@ -86,12 +86,12 @@ public class Job {
         this.contactEmail = contactEmail;
     }
 
-    public boolean getHaveApplied() {
-        return haveApplied;
+    public Boolean getApplied() {
+        return applied;
     }
 
-    public void setHaveApplied(boolean haveApplied) {
-        this.haveApplied = haveApplied;
+    public void isApplied(boolean haveApplied) {
+        this.applied = haveApplied;
     }
 
     public String getComments() {
@@ -100,5 +100,13 @@ public class Job {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
