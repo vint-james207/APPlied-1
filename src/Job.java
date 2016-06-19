@@ -17,7 +17,7 @@ public class Job {
     public Job() {
     }
 
-    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, boolean applied, String comments, Integer userId) {
+    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, Boolean applied, String comments, Integer userId) {
         this.jobId = jobId;
         this.companyName = companyName;
         this.location = location;
@@ -90,8 +90,8 @@ public class Job {
         return applied;
     }
 
-    public void isApplied(boolean haveApplied) {
-        this.applied = haveApplied;
+    public void isApplied(Boolean applied) {
+        this.applied = applied;
     }
 
     public String getComments() {
