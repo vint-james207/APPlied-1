@@ -106,6 +106,9 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     String username = session.attribute("username");
+                    if (username == null) {
+                        Spark.halt(403, "You must be logged in to do that.");
+                    }
 
                     User user = selectUser(conn, username);
                     ArrayList<Job> jobs = selectJobs(conn, user.userId);
@@ -120,14 +123,14 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     User user = parser.parse(body, User.class);
                     if (user.username == null || user.password == null) {
-                        throw new Exception("Name or password not sent");
+                        Spark.halt(401, "Name or password not sent");
                     }
                     User validUser = selectUser(conn, user.username);
                     if (validUser == null) {
                         insertUser(conn, user);
                     }
                     else if (!validUser.password.equals(user.password)) {
-                        throw new Exception("Wrong password.");
+                        Spark.halt(403, "Wrong password.");
                     }
                     Session session = request.session();
                     session.attribute("username", user.username);
@@ -165,7 +168,7 @@ public class Main {
                     Session session = request.session();
                     String username = session.attribute("username");
                     if (username == null) {
-                        throw new Exception("Not logged in.");
+                        Spark.halt(403, "Not logged in.");
                     }
                     String body = request.body();
                     JsonParser parser = new JsonParser();
@@ -181,7 +184,7 @@ public class Main {
                     Session session = request.session();
                     String username = session.attribute("username");
                     if (username == null) {
-                        throw new Exception("Not logged in.");
+                        Spark.halt(403, "Not logged in.");
                     }
                     int id = Integer.valueOf(request.params(":job_id"));
                     deleteJobs(conn, id);
