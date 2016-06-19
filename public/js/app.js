@@ -45,7 +45,7 @@ var apply = {
           var jobs = {
             companyName: $('input[name = "company"]').val(),
             salary: $('input[name = "salary"]').val(),
-            applied:  $('input[name = "haveApplied"]').val(),
+            applied:  true,
             location:  $('input[name = "location"]').val(),
             contactName:  $('input[name = "contactName"]').val(),
             contactNumber:  $('input[name = "phone"]').val(),
