@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>APPly</title>
     <link rel="stylesheet" href="css/styles.css">
-  </head>
+</head>
 
-  <body>
+<body>
     <header class="hidden">
     </header>
     <div id="logIn">
-      <div id = 'logInLogo' ><h1 id="logTitle">APP</h1><h2>ly</h4>
+        <div id='logInLogo'>
+            <h1 id="logTitle">APP</h1>
+            <h2>ly</h4>
       <form action="">
         <input required class = "input" type="text" name="" id="userName" placeholder = "User Name:">
         <input required class = "input" type="password" name="" id="password" placeholder="Password:">
-        <button id = "submit" type="button" name="submit"><b>Log In</b></button>
+        <button id = "logInButton" type="button" name="submit"><b>Log In</b></button>
       </form>
       </div>
     </div>
@@ -48,7 +51,7 @@
         <fieldset>
           <label for="comments">Comments:</label>
           <textarea class = 'blocked' name="comments" rows="5" cols="30"></textarea>
-              <button type="submit" name="button" value="submit"> APPly </button>
+              <button id = 'apply' type="submit" name="button" value="submit"> APPly </button>
         </fieldset>
 
 
@@ -56,12 +59,11 @@
     </aside>
 
     <aside id = "appliedTo">
-      <ul id = 'appliedList'>
+      <!-- <ul id = 'appliedList'>
 
-      </ul>
+      </ul> -->
     </aside>
     <script src="node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
     <script src="node_modules/underscore/underscore.js" charset="utf-8"></script>
     <script src="js/app.js" charset="utf-8"></script>
   </body>
