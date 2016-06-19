@@ -12,7 +12,7 @@ var apply = {
 
     },
     events: function() {
-        $('#submit').on('click', function() {
+        $('#logInButton').on('click', function() {
           event.preventDefault();
             var user = {
                 username: $('#userName').val(),
@@ -35,7 +35,24 @@ var apply = {
                   console.error("something went wrong",err);
                 }
 
-            })
+            });
+
+            apply.read();
+        })
+
+        $('apply').on('click', function(){
+          var jobs = {
+            companyName: $('input[name = "company"]').val(),
+            salary: $('input[name = "salary"]'),
+            haveApplied:  $('input[name = "haveApplied"]'),
+            location:  $('input[name = "location"]'),
+            contactName:  $('input[name = "contactName"]'),
+            contactNumber:  $('input[name = "phone"]'),
+            contact_email:  $('input[name = "email"]'),
+            comments:  $('textarea[name = "comments"]')
+          }
+          apply.create(JSON.stringify(jobs));
+          apply.read();
         })
     },
 
@@ -61,6 +78,9 @@ var apply = {
             success: function(data) {
                 console.log(data);
                 data = JSON.parse(data);
+                data.forEach(function(item){
+                  $('.appliedTo').append(item);
+                })
             },
             error: function(err) {
                 console.error(err);
