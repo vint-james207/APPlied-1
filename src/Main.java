@@ -142,7 +142,7 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     session.invalidate();
-                    return "";
+                    return "Success.";
                 }
         );
 
@@ -158,7 +158,7 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
                     insertJob(conn, job);
-                    return "";
+                    return "Success.";
                 }
         );
 
@@ -174,7 +174,7 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
                     updateJobs(conn, job);
-                    return "";
+                    return "Success.";
                 }
         );
 
@@ -188,7 +188,7 @@ public class Main {
                     }
                     int id = Integer.valueOf(request.params(":job_id"));
                     deleteJobs(conn, id);
-                    return "";
+                    return "Success.";
                 }
         );
     }
