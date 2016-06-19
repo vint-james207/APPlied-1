@@ -10,7 +10,7 @@ public class Job {
     String contactName;
     String contactNumber;
     String contactEmail;
-    Boolean haveApplied;
+    boolean haveApplied;
     Integer rating;
     String comments;
     Integer userId;
@@ -88,11 +88,11 @@ public class Job {
         this.contactEmail = contactEmail;
     }
 
-    public Boolean getHaveApplied() {
+    public boolean getHaveApplied() {
         return haveApplied;
     }
 
-    public void setHaveApplied(Boolean haveApplied) {
+    public void setHaveApplied(boolean haveApplied) {
         this.haveApplied = haveApplied;
     }
 
