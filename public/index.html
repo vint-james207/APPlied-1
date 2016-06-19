@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>APPly</title>
     <link rel="stylesheet" href="css/styles.css">
-  </head>
+</head>
 
-  <body>
+<body>
     <header class="hidden">
     </header>
     <div id="logIn">
-      <div id = 'logInLogo' ><h1 id="logTitle">APP</h1><h2>ly</h4>
+        <div id='logInLogo'>
+            <h1 id="logTitle">APP</h1>
+            <h2>ly</h4>
       <form action="">
-        <input required class = "input" type="text" name="" id="" placeholder = "User Name:">
-        <input required class = "input" type="password" name="" id="" placeholder="Password:">
-        <button id = "submit" type="button" name="submit"><b>Log In</b></button>
+        <input required class = "input" type="text" name="" id="userName" placeholder = "User Name:">
+        <input required class = "input" type="password" name="" id="password" placeholder="Password:">
+        <button id = "logInButton" type="button" name="submit"><b>Log In</b></button>
       </form>
       </div>
     </div>
     <aside id="appliedAdd">
       <form action="">
         <fieldset>
-          <label for="company">Company:</label>
+          <label class= "blocked" for="company">Company:</label>
           <input type="text" name="company" value="">
+          <fieldset>
+          <label class ='blocked' for="haveApplied">Applied:</label>
+          <input class = "radio" type="radio" name="haveApplied" value = "true" checked>Yes</br>
+          <input class = "radio" type="radio" name="haveApplied" value = "false">No
+          </fieldset>
         </fieldset>
         <fieldset>
           <label for="salary">Salary:</label>
-          <input type="text" name="salary" value="">
+          <input class = 'blocked' type="text" name="salary" value="">
         </fieldset>
         <fieldset>
           <label for="location">Location:</label>
-          <input type="text" name="location" value="">
+          <input class ='blocked'  type="text" name="location" value="">
         </fieldset>
         <fieldset>
           <label for="contactName">Contact Name:</label>
-          <input type="text" name="contactName" value="">
+          <input class ='blocked' type="text" name="contactName" value="">
           <label for="phone">Phone:</label>
-          <input type="text" name="phone" value="">
+          <input class ='blocked' type="text" name="phone" value="">
           <label for="email">Email:</label>
-          <input type="text" name="email" value="">
+          <input class ='blocked' type="text" name="email" value="">
         </fieldset>
         <fieldset>
           <label for="comments">Comments:</label>
-          <textarea name="comments" rows="5" cols="30"></textarea>
+          <textarea class = 'blocked' name="comments" rows="5" cols="30"></textarea>
+              <button id = 'apply' type="submit" name="button" value="submit"> APPly </button>
         </fieldset>
+
+
       </form>
     </aside>
 
     <aside id = "appliedTo">
-      <ul id = 'appliedList'>
+      <!-- <ul id = 'appliedList'>
 
-      </ul>
+      </ul> -->
     </aside>
     <script src="node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
     <script src="node_modules/underscore/underscore.js" charset="utf-8"></script>
     <script src="js/app.js" charset="utf-8"></script>
   </body>
