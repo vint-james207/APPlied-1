@@ -32,11 +32,11 @@ public class MainTest {
         Connection conn = startConnection();
         User user = new User(1, "Bob", "pw");
         Main.insertUser(conn, user);
-        Job job1 = new Job(1, "company", "place", "salary", "contact", "555", "email", true, 3, "comments", user.userId);
+        Job job1 = new Job(1, "company", "place", "salary", "contact", "555", "email", true, "comments", user.userId);
         Main.insertJob(conn, job1);
-        Job job2 = new Job(2, "iron yard", "chs", "salary", "contact", "555", "email", false, 5, "comments", user.userId);
+        Job job2 = new Job(2, "iron yard", "chs", "salary", "contact", "555", "email", false, "comments", user.userId);
         Main.insertJob(conn, job2);
-        Job job3 = new Job(3, "mcdonalds", "nyc", "salary", "contact", "555", "email", true, 1, "comments", user.userId);
+        Job job3 = new Job(3, "mcdonalds", "nyc", "salary", "contact", "555", "email", true, "comments", user.userId);
         Main.insertJob(conn, job3);
         ArrayList<Job> jobs = Main.selectJobs(conn, 1);
         conn.close();
@@ -48,9 +48,9 @@ public class MainTest {
         Connection conn = startConnection();
         User user = new User(1, "Bob", "pw");
         Main.insertUser(conn, user);
-        Job job = new Job(1, "company", "place", "salary", "contact", "555", "email", true, 3, "comments", user.userId);
+        Job job = new Job(1, "company", "place", "salary", "contact", "555", "email", true, "comments", user.userId);
         Main.insertJob(conn, job);
-        Job updatedJob = new Job(1, "com", "loc", "salary", "contact", "550", "email", false, 5, "comments", user.userId);
+        Job updatedJob = new Job(1, "com", "loc", "salary", "contact", "550", "email", false, "comments", user.userId);
         Main.updateJobs(conn, updatedJob);
         ArrayList<Job> jobs = Main.selectJobs(conn, user.userId);
         conn.close();
@@ -64,7 +64,7 @@ public class MainTest {
         Connection conn = startConnection();
         User user = new User(1, "Bob", "pw");
         Main.insertUser(conn, user);
-        Job job = new Job(1, "company", "place", "salary", "contact", "555", "email", true, 3, "comments", user.userId);
+        Job job = new Job(1, "company", "place", "salary", "contact", "555", "email", true, "comments", user.userId);
         Main.deleteJobs(conn, 1);
         ArrayList<Job> jobs = Main.selectJobs(conn, user.userId);
         conn.close();
