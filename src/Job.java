@@ -10,14 +10,14 @@ public class Job {
     String contactName;
     String contactNumber;
     String contactEmail;
-    boolean applied;
+    Boolean applied;
     String comments;
     Integer userId;
 
     public Job() {
     }
 
-    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, boolean applied, String comments, Integer userId) {
+    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, Boolean applied, String comments, Integer userId) {
         this.jobId = jobId;
         this.companyName = companyName;
         this.location = location;
@@ -86,11 +86,11 @@ public class Job {
         this.contactEmail = contactEmail;
     }
 
-    public Boolean isApplied() {
+    public Boolean getApplied() {
         return applied;
     }
 
-    public void setApplied(boolean applied) {
+    public void setApplied(Boolean applied) {
         this.applied = applied;
     }
 
