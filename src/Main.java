@@ -61,7 +61,7 @@ public class Main {
             String contactName = results.getString("jobs.contact_name");
             String contactNumber = results.getString("jobs.contact_number");
             String contactEmail = results.getString("jobs.contact_email");
-            boolean applied = results.getBoolean("jobs.have_applied");
+            Boolean applied = results.getBoolean("jobs.have_applied");
             String comments = results.getString("jobs.comments");
             Job job = new Job(jobId, companyName, location, salary, contactName, contactNumber, contactEmail, applied, comments, userId);
             jobs.add(job);
