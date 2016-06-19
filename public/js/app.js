@@ -37,10 +37,11 @@ var apply = {
 
             });
 
-            apply.read();
+          //  apply.read();
         })
 
-        $('apply').on('click', function(){
+        $('#apply').on('click', function(){
+          event.preventDefault();
           var jobs = {
             companyName: $('input[name = "company"]').val(),
             salary: $('input[name = "salary"]'),
@@ -52,7 +53,7 @@ var apply = {
             comments:  $('textarea[name = "comments"]')
           }
           apply.create(JSON.stringify(jobs));
-          apply.read();
+          //apply.read();
         })
     },
 
