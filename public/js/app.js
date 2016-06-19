@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
   apply.init();
@@ -56,6 +57,10 @@ var apply = {
           apply.create(JSON.stringify(jobs));
           //apply.read();
         });
+
+        $('#append').on('click', function(){
+           apply.read();
+        })
     },
 
 
@@ -81,7 +86,9 @@ var apply = {
                 console.log(data);
                 data = JSON.parse(data);
                 data.forEach(function(item){
-                  $('.appliedTo').append(item);
+                  console.log('this is the item',item);
+                  $('#appliedTo ul').append(`<li><fieldset>${item.companyName} </br> ${item.salary} </br> ${item.location} </br> ${item.contactName} </br> ${item.contactNumber}
+                    </br> ${item.contactEmail} </br> ${item.comments}</fieldset>`);
                 });
             },
             error: function(err) {
