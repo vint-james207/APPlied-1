@@ -35,16 +35,16 @@ public class Main {
     }
 
     public static void insertJob(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        stmt.setString(1, job.companyName);
-        stmt.setString(2, job.location);
-        stmt.setString(3, job.salary);
-        stmt.setString(4, job.contactName);
-        stmt.setString(5, job.contactNumber);
-        stmt.setString(6, job.contactEmail);
-        stmt.setBoolean(7, job.applied);
-        stmt.setString(8, job.comments);
-        stmt.setInt(9, job.userId);
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+        stmt.setInt(1, job.userId);
+        stmt.setString(2, job.companyName);
+        stmt.setString(3, job.location);
+        stmt.setString(4, job.salary);
+        stmt.setString(5, job.contactName);
+        stmt.setString(6, job.contactNumber);
+        stmt.setString(7, job.contactEmail);
+        stmt.setBoolean(8, job.applied);
+        stmt.setString(9, job.comments);
         stmt.execute();
     }
 
