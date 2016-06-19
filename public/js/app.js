@@ -44,14 +44,15 @@ var apply = {
           event.preventDefault();
           var jobs = {
             companyName: $('input[name = "company"]').val(),
-            salary: $('input[name = "salary"]'),
-            haveApplied:  $('input[name = "haveApplied"]'),
-            location:  $('input[name = "location"]'),
-            contactName:  $('input[name = "contactName"]'),
-            contactNumber:  $('input[name = "phone"]'),
-            contactEmail:  $('input[name = "email"]'),
-            comments:  $('textarea[name = "comments"]')
+            salary: $('input[name = "salary"]').val(),
+            haveApplied:  $('input[name = "haveApplied"]').val(),
+            location:  $('input[name = "location"]').val(),
+            contactName:  $('input[name = "contactName"]').val(),
+            contactNumber:  $('input[name = "phone"]').val(),
+            contactEmail:  $('input[name = "email"]').val(),
+            comments:  $('textarea[name = "comments"]').val()
           };
+          console.log(jobs);
           apply.create(JSON.stringify(jobs));
           //apply.read();
         });
