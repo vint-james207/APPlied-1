@@ -12,7 +12,7 @@ public class Main {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (user_id IDENTITY, username VARCHAR, password VARCHAR)");
         stmt.execute("CREATE TABLE IF NOT EXISTS jobs (job_id IDENTITY, company_name VARCHAR, salary VARCHAR, location VARCHAR, contact_name VARCHAR, contact_number VARCHAR, " +
-                "contact_email VARCHAR, have_applied BOOLEAN, rating INT, comments VARCHAR, user_id INT)");
+                "contact_email VARCHAR, have_applied BOOLEAN, comments VARCHAR, user_id INT)");
     }
 
     public static void insertUser(Connection conn, User user) throws SQLException {
@@ -35,17 +35,16 @@ public class Main {
     }
 
     public static void insertJob(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO jobs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
         stmt.setString(3, job.salary);
         stmt.setString(4, job.contactName);
         stmt.setString(5, job.contactNumber);
         stmt.setString(6, job.contactEmail);
-        stmt.setBoolean(7, job.haveApplied);
-        stmt.setInt(8, job.rating);
-        stmt.setString(9, job.comments);
-        stmt.setInt(10, job.userId);
+        stmt.setBoolean(7, job.applied);
+        stmt.setString(8, job.comments);
+        stmt.setInt(9, job.userId);
         stmt.execute();
     }
 
@@ -62,27 +61,25 @@ public class Main {
             String contactName = results.getString("jobs.contact_name");
             String contactNumber = results.getString("jobs.contact_number");
             String contactEmail = results.getString("jobs.contact_email");
-            Boolean haveApplied = results.getBoolean("jobs.have_applied");
-            Integer rating = results.getInt("jobs.rating");
+            Boolean applied = results.getBoolean("jobs.have_applied");
             String comments = results.getString("jobs.comments");
-            Job job = new Job(jobId, companyName, location, salary, contactName, contactNumber, contactEmail, haveApplied, rating, comments, userId);
+            Job job = new Job(jobId, companyName, location, salary, contactName, contactNumber, contactEmail, applied, comments, userId);
             jobs.add(job);
         }
         return jobs;
     }
 
     public static void updateJobs(Connection conn, Job job) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET company_name = ?, location = ?, salary = ?, contact_name = ?, contact_number = ?, contact_email = ?, have_applied = ?, rating = ?, comments = ? WHERE job_id = ?");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE jobs SET company_name = ?, location = ?, salary = ?, contact_name = ?, contact_number = ?, contact_email = ?, have_applied = ?, comments = ? WHERE job_id = ?");
         stmt.setString(1, job.companyName);
         stmt.setString(2, job.location);
         stmt.setString(3, job.salary);
         stmt.setString(4, job.contactName);
         stmt.setString(5, job.contactNumber);
         stmt.setString(6, job.contactEmail);
-        stmt.setBoolean(7, job.haveApplied);
-        stmt.setInt(8, job.rating);
-        stmt.setString(9, job.comments);
-        stmt.setInt(10, job.jobId);
+        stmt.setBoolean(7, job.applied);
+        stmt.setString(8, job.comments);
+        stmt.setInt(9, job.jobId);
         stmt.execute();
     }
 
@@ -106,6 +103,9 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     String username = session.attribute("username");
+                    if (username == null) {
+                        Spark.halt(403, "You must be logged in to do that.");
+                    }
 
                     User user = selectUser(conn, username);
                     ArrayList<Job> jobs = selectJobs(conn, user.userId);
@@ -120,17 +120,17 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     User user = parser.parse(body, User.class);
                     if (user.username == null || user.password == null) {
-                        throw new Exception("Name or password not sent");
+                        Spark.halt(401, "Name or password not sent");
                     }
                     User validUser = selectUser(conn, user.username);
                     if (validUser == null) {
                         insertUser(conn, user);
                     }
                     else if (!validUser.password.equals(user.password)) {
-                        throw new Exception("Wrong password.");
+                        Spark.halt(403, "Wrong password.");
                     }
                     Session session = request.session();
-                    session.attribute("username", validUser);
+                    session.attribute("username", user.username);
                     return "Success.";
                 }
         );
@@ -139,7 +139,7 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     session.invalidate();
-                    return "";
+                    return "Success.";
                 }
         );
 
@@ -151,11 +151,13 @@ public class Main {
                     if (username == null) {
                         throw new Exception("Not logged in.");
                     }
+                    User user = selectUser(conn, username);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
+                    job.setUserId(user.userId);
                     insertJob(conn, job);
-                    return "";
+                    return "Success.";
                 }
         );
 
@@ -165,13 +167,13 @@ public class Main {
                     Session session = request.session();
                     String username =session.attribute("username");
                     if (username == null) {
-                        throw new Exception("Not logged in.");
+                        Spark.halt(403, "Not logged in.");
                     }
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Job job = parser.parse(body, Job.class);
                     updateJobs(conn, job);
-                    return "";
+                    return "Success.";
                 }
         );
 
@@ -181,11 +183,11 @@ public class Main {
                     Session session = request.session();
                     String username = session.attribute("username");
                     if (username == null) {
-                        throw new Exception("Not logged in.");
+                        Spark.halt(403, "Not logged in.");
                     }
                     int id = Integer.valueOf(request.params(":job_id"));
                     deleteJobs(conn, id);
-                    return "";
+                    return "Success.";
                 }
         );
     }

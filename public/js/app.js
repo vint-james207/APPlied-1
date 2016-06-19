@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
   apply.init();
@@ -17,12 +18,12 @@ var apply = {
             var user = {
                 username: $('#userName').val(),
                 password: $('#password').val()
-            }
+            };
 
             $('#logIn').fadeOut(2000, function() {
                 $('header').removeClass('hidden');
-            })
-            console.log(JSON.stringify(user))
+            });
+            console.log(JSON.stringify(user));
             $.ajax({
                 method: "POST",
                 url: "/login",
@@ -37,22 +38,28 @@ var apply = {
 
             });
 
-            apply.read();
-        })
+          //  apply.read();
+        });
 
-        $('apply').on('click', function(){
+        $('#apply').on('click', function(){
+          event.preventDefault();
           var jobs = {
             companyName: $('input[name = "company"]').val(),
-            salary: $('input[name = "salary"]'),
-            haveApplied:  $('input[name = "haveApplied"]'),
-            location:  $('input[name = "location"]'),
-            contactName:  $('input[name = "contactName"]'),
-            contactNumber:  $('input[name = "phone"]'),
-            contact_email:  $('input[name = "email"]'),
-            comments:  $('textarea[name = "comments"]')
-          }
+            salary: $('input[name = "salary"]').val(),
+            applied:  true,
+            location:  $('input[name = "location"]').val(),
+            contactName:  $('input[name = "contactName"]').val(),
+            contactNumber:  $('input[name = "phone"]').val(),
+            contactEmail:  $('input[name = "email"]').val(),
+            comments:  $('textarea[name = "comments"]').val()
+          };
+          console.log(jobs);
           apply.create(JSON.stringify(jobs));
-          apply.read();
+          //apply.read();
+        });
+
+        $('#append').on('click', function(){
+           apply.read();
         })
     },
 
@@ -69,7 +76,7 @@ var apply = {
             error: function(err) {
                 console.error(err);
             }
-        })
+        });
     },
     read: function() {
         $.ajax({
@@ -79,13 +86,15 @@ var apply = {
                 console.log(data);
                 data = JSON.parse(data);
                 data.forEach(function(item){
-                  $('.appliedTo').append(item);
-                })
+                  console.log('this is the item',item);
+                  $('#appliedTo ul').append(`<li><fieldset>${item.companyName} </br> ${item.salary} </br> ${item.location} </br> ${item.contactName} </br> ${item.contactNumber}
+                    </br> ${item.contactEmail} </br> ${item.comments}</fieldset>`);
+                });
             },
             error: function(err) {
                 console.error(err);
             }
-        })
+        });
     },
     update: function() {
         $.ajax({
@@ -97,7 +106,7 @@ var apply = {
             error:function(err) {
 
             }
-        })
+        });
     },
     destroy: function() {
         $.ajax({
@@ -109,6 +118,6 @@ var apply = {
             error: function(err) {
                 console.error(err);
             }
-        })
+        });
     }
-}
+};

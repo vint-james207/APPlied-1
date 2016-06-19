@@ -14,7 +14,7 @@ body {
     background-size: cover;
 }
 header {
-    background-color: white;
+    background-color:#22505e;
     opacity: .4;
     width: 100%;
     height: 50px;
@@ -88,6 +88,7 @@ aside {
     height: 100px;
     width: 35%;
     margin-left: 200px;
+    color: #737dc2;
 }
 .radio {
     display: inline-block !important;

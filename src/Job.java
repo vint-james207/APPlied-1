@@ -10,15 +10,14 @@ public class Job {
     String contactName;
     String contactNumber;
     String contactEmail;
-    Boolean haveApplied;
-    Integer rating;
+    Boolean applied;
     String comments;
     Integer userId;
 
     public Job() {
     }
 
-    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, Boolean haveApplied, Integer rating, String comments, Integer userId) {
+    public Job(Integer jobId, String companyName, String location, String salary, String contactName, String contactNumber, String contactEmail, Boolean applied, String comments, Integer userId) {
         this.jobId = jobId;
         this.companyName = companyName;
         this.location = location;
@@ -26,8 +25,7 @@ public class Job {
         this.contactName = contactName;
         this.contactNumber = contactNumber;
         this.contactEmail = contactEmail;
-        this.haveApplied = haveApplied;
-        this.rating = rating;
+        this.applied = applied;
         this.comments = comments;
         this.userId = userId;
     }
@@ -88,20 +86,12 @@ public class Job {
         this.contactEmail = contactEmail;
     }
 
-    public Boolean getHaveApplied() {
-        return haveApplied;
+    public Boolean getApplied() {
+        return applied;
     }
 
-    public void setHaveApplied(Boolean haveApplied) {
-        this.haveApplied = haveApplied;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public void setApplied(Boolean applied) {
+        this.applied = applied;
     }
 
     public String getComments() {
@@ -113,10 +103,10 @@ public class Job {
     }
 
     public Integer getUserId() {
-        return rating;
+        return userId;
     }
 
-    public void setUserId(Integer rating) {
-        this.rating = rating;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
