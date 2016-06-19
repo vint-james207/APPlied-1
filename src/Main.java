@@ -130,7 +130,7 @@ public class Main {
                         throw new Exception("Wrong password.");
                     }
                     Session session = request.session();
-                    session.attribute("username", validUser);
+                    session.attribute("username", user.username);
                     return "Success.";
                 }
         );
