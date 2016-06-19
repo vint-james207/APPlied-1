@@ -17,12 +17,12 @@ var apply = {
             var user = {
                 username: $('#userName').val(),
                 password: $('#password').val()
-            }
+            };
 
             $('#logIn').fadeOut(2000, function() {
                 $('header').removeClass('hidden');
-            })
-            console.log(JSON.stringify(user))
+            });
+            console.log(JSON.stringify(user));
             $.ajax({
                 method: "POST",
                 url: "/login",
@@ -38,7 +38,7 @@ var apply = {
             });
 
           //  apply.read();
-        })
+        });
 
         $('#apply').on('click', function(){
           event.preventDefault();
@@ -49,12 +49,12 @@ var apply = {
             location:  $('input[name = "location"]'),
             contactName:  $('input[name = "contactName"]'),
             contactNumber:  $('input[name = "phone"]'),
-            contact_email:  $('input[name = "email"]'),
+            contactEmail:  $('input[name = "email"]'),
             comments:  $('textarea[name = "comments"]')
-          }
+          };
           apply.create(JSON.stringify(jobs));
           //apply.read();
-        })
+        });
     },
 
 
@@ -70,7 +70,7 @@ var apply = {
             error: function(err) {
                 console.error(err);
             }
-        })
+        });
     },
     read: function() {
         $.ajax({
@@ -81,12 +81,12 @@ var apply = {
                 data = JSON.parse(data);
                 data.forEach(function(item){
                   $('.appliedTo').append(item);
-                })
+                });
             },
             error: function(err) {
                 console.error(err);
             }
-        })
+        });
     },
     update: function() {
         $.ajax({
@@ -98,7 +98,7 @@ var apply = {
             error:function(err) {
 
             }
-        })
+        });
     },
     destroy: function() {
         $.ajax({
@@ -110,6 +110,6 @@ var apply = {
             error: function(err) {
                 console.error(err);
             }
-        })
+        });
     }
-}
+};
